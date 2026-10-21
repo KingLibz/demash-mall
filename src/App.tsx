@@ -1,3 +1,4 @@
+import PerformanceDashboard from "./components/PerformanceDashboard";
 import RealMarketingHero from "./components/RealMarketingHero";
 /**
  * @license
