@@ -1,5 +1,0 @@
-// REAL FLOW: Client -> Supplier POS directly, Demash tracks profit via referral
-// 1. Client clicks Pay on your site
-// 2. Redirect to SUPPLIER Paynow/EcoCash POS (not your EcoCash personal)
-// 3. Supplier confirms payment
-// 4. Webhook adds referral profit only: e.g. 10% of deal
