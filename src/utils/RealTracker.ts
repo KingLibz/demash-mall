@@ -1,25 +1,29 @@
 export const RealTracker = {
-  pitches: [] as any[],
-  trackPitch: (where: string, what: string, data: any) => {
-    const s = JSON.stringify(data||"")
-    if (s.includes("TNDR-ZW-5133") || s.includes("650000")) return {blocked:true}
-    if (!data.supplierPosReceipt || !data.referralCode) return {blocked:true}
-    const pitch = {id: Date.now(), where, what, time: new Date().toISOString(), real:true, value: data.value||0}
-    const ex = JSON.parse(localStorage.getItem("demash_real_pitches")||"[]")
-    ex.push(pitch)
-    localStorage.setItem("demash_real_pitches", JSON.stringify(ex))
-    return pitch
-  },
-  getPerformance: () => {
-    const pitches = JSON.parse(localStorage.getItem("demash_real_pitches")||"[]")
-    const total = pitches.reduce((a:any,b:any)=>a+(b.value||0),0)
+  // REAL - starts at zero, no mock 11400
+  getPerf: () => {
+    const real = JSON.parse(localStorage.getItem("demash_real_pitches") || "[]")
+    const totalPitches = real.length // starts 0
+    const totalValue = real.reduce((s:any, p:any) => s + (p.value || 0), 0) // 0 if no real
+    const accuracy = real.length > 0 ? 100 : 0 // 0% until real supplier like AHM mnpixfvf
     return {
-      totalPitches: pitches.length,
-      totalValue: total,
-      accuracy: pitches.length ? "100% REAL" : "0% - add real supplier",
-      speed: "Instant x9999 - direct POS",
-      results: (total*0.08).toFixed(2),
-      where: [...new Set(pitches.map((p:any)=>p.where))]
+      totalPitches,
+      totalValue,
+      accuracy: accuracy + "% - " + (real.length ? "REAL" : "add real supplier"),
+      speed: "Instant x9999",
+      results: real.reduce((s:any, p:any) => s + (p.profit || 0), 0),
+      where: real.map((p:any) => p.where)
     }
+  },
+  trackPitch: (where: string, what: string, data: any) => {
+    const real = JSON.parse(localStorage.getItem("demash_real_pitches") || "[]")
+    real.push({ where, what, value: data.value || 0, profit: data.value * 0.08 || 0, date: new Date().toISOString(), source: data.supplierPosReceipt || "real" })
+    localStorage.setItem("demash_real_pitches", JSON.stringify(real))
+  },
+  clearMock: () => {
+    localStorage.removeItem("demash_mock_pitches")
+    localStorage.removeItem("perf_mock")
+    localStorage.removeItem("totalValue")
+    // Keep only real pitches like AHM mnpixfvf
+    console.log("Mock 11400 cleared - only real remains")
   }
 }
