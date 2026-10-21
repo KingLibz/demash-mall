@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bg512" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b1320" />
+      <stop offset="100%" stop-color="#05080f" />
+    </linearGradient>
+    <linearGradient id="gold512" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fbbf24" />
+      <stop offset="100%" stop-color="#d97706" />
+    </linearGradient>
+    <filter id="glow512" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="8" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="112" fill="url(#bg512)" />
+  <rect x="6" y="6" width="500" height="500" rx="106" fill="none" stroke="#f59e0b" stroke-opacity="0.3" stroke-width="4" />
+  
+  <g transform="translate(96, 90)" filter="url(#glow512)">
+    <path d="M25 260 L25 50 L145 50 C225 50 295 100 295 155 C295 210 225 260 145 260 Z" fill="none" stroke="url(#gold512)" stroke-width="30" stroke-linecap="round" stroke-linejoin="round" />
+    <line x1="25" y1="155" x2="175" y2="155" stroke="#f59e0b" stroke-width="15" stroke-linecap="round" />
+    <line x1="115" y1="50" x2="115" y2="260" stroke="#f59e0b" stroke-width="15" stroke-opacity="0.6" stroke-linecap="round" />
+    <circle cx="145" cy="155" r="20" fill="#fbbf24" />
+  </g>
+
+  <text x="256" y="420" font-family="system-ui, -apple-system, sans-serif" font-size="38" font-weight="900" letter-spacing="8" fill="#f59e0b" text-anchor="middle">DEMASH GLOBAL</text>
+  <text x="256" y="455" font-family="system-ui, -apple-system, sans-serif" font-size="16" font-weight="600" letter-spacing="4" fill="#94a3b8" text-anchor="middle">CONSTRUCTION · ESCROW · REAL ESTATE</text>
+</svg>

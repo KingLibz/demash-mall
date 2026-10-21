@@ -1,0 +1,56 @@
+{
+  "id": "/?utm_source=pwa_installation",
+  "name": "Demash Global Autonomous Core Management Engine",
+  "short_name": "DemashCore",
+  "description": "1,000,000,000x Hardened Sovereign Brokerage, Procurement, Logistics & Multi-Gateway Financial Settlement Console.",
+  "start_url": "/?utm_source=pwa_installation",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "theme_color": "#0b1320",
+  "background_color": "#050a12",
+  "categories": ["business", "finance", "productivity"],
+  "icons": [
+    {
+      "src": "/icon-192.svg",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-512.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-maskable.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Cost Estimator",
+      "short_name": "Estimator",
+      "description": "Calculate turnkey construction & pool costs",
+      "url": "/?tab=estimator",
+      "icons": [{ "src": "/icon-192.svg", "sizes": "192x192" }]
+    },
+    {
+      "name": "Domestic Outsourcing Valve",
+      "short_name": "Outsourcing",
+      "description": "Domestic Subcontracting & 20% Net Margin Valve",
+      "url": "/?tab=admin",
+      "icons": [{ "src": "/icon-192.svg", "sizes": "192x192" }]
+    },
+    {
+      "name": "Sovereign Milestones",
+      "short_name": "Milestones",
+      "description": "Rigid Strategic Milestone Performance Matrix",
+      "url": "/?tab=admin",
+      "icons": [{ "src": "/icon-192.svg", "sizes": "192x192" }]
+    }
+  ]
+}

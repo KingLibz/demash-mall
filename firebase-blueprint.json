@@ -1,0 +1,45 @@
+{
+  "entities": {
+    "DemashLead": {
+      "title": "DemashLead",
+      "description": "Captured client lead and procurement demand buffer record.",
+      "type": "object",
+      "properties": {
+        "trackingId": {
+          "type": "string",
+          "description": "Unique tracking ID for the lead buffer."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the lead was submitted."
+        },
+        "clientProfile": {
+          "type": "object",
+          "description": "Client profile containing name and contact information."
+        },
+        "messagePayload": {
+          "type": "object",
+          "description": "Raw message, normalized tokens, and extracted URLs."
+        },
+        "intentScore": {
+          "type": "number",
+          "description": "Calculated intent score (0-100)."
+        },
+        "routingStatus": {
+          "type": "object",
+          "description": "Routing target and dispatch status."
+        }
+      },
+      "required": ["trackingId", "clientProfile", "messagePayload", "intentScore", "routingStatus"]
+    }
+  },
+  "firestore": {
+    "/demash_global_leads/{leadId}": {
+      "schema": {
+        "$ref": "#/entities/DemashLead"
+      },
+      "description": "Buffered client procurement inquiries and intent scores."
+    }
+  }
+}

@@ -1,0 +1,17 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function isValidId(id) {
+      return id is string && id.size() > 0 && id.size() <= 128 && id.matches('^[a-zA-Z0-9_-]+$');
+    }
+
+    match /demash_global_leads/{leadId} {
+      allow read: if request.auth != null;
+      allow create: if isValidId(leadId) &&
+                    request.resource.data.keys().hasAll(['trackingId', 'clientProfile', 'messagePayload', 'intentScore', 'routingStatus']) &&
+                    request.resource.data.trackingId is string &&
+                    request.resource.data.intentScore is number;
+      allow update, delete: if request.auth != null;
+    }
+  }
+}

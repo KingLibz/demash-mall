@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192" width="192" height="192">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b1320" />
+      <stop offset="100%" stop-color="#05080f" />
+    </linearGradient>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fbbf24" />
+      <stop offset="100%" stop-color="#d97706" />
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="4" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+  <rect width="192" height="192" rx="42" fill="url(#bg)" />
+  <rect x="2" y="2" width="188" height="188" rx="40" fill="none" stroke="#f59e0b" stroke-opacity="0.3" stroke-width="2" />
+  
+  <!-- Architectural Crane & Building Monogram "D" -->
+  <g transform="translate(36, 34)" filter="url(#glow)">
+    <!-- Building block structural pillar -->
+    <path d="M10 100 L10 20 L55 20 C85 20 110 40 110 60 C110 80 85 100 55 100 Z" fill="none" stroke="url(#gold)" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" />
+    <!-- Center geometric grid lines -->
+    <line x1="10" y1="60" x2="65" y2="60" stroke="#f59e0b" stroke-width="6" stroke-linecap="round" />
+    <line x1="45" y1="20" x2="45" y2="100" stroke="#f59e0b" stroke-width="6" stroke-opacity="0.6" stroke-linecap="round" />
+    <circle cx="55" cy="60" r="8" fill="#fbbf24" />
+  </g>
+
+  <!-- Precision Tag -->
+  <text x="96" y="160" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="800" letter-spacing="3" fill="#f59e0b" text-anchor="middle">DEMASH</text>
+</svg>

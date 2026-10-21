@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bgMask" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b1320" />
+      <stop offset="100%" stop-color="#05080f" />
+    </linearGradient>
+    <linearGradient id="goldMask" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fbbf24" />
+      <stop offset="100%" stop-color="#d97706" />
+    </linearGradient>
+  </defs>
+  <!-- Full bleed background for maskable circle cropping -->
+  <rect width="512" height="512" fill="url(#bgMask)" />
+  
+  <!-- Safe Zone Graphic scaled down to center (fits within 80% safe zone) -->
+  <g transform="translate(136, 120) scale(0.75)">
+    <path d="M25 260 L25 50 L145 50 C225 50 295 100 295 155 C295 210 225 260 145 260 Z" fill="none" stroke="url(#goldMask)" stroke-width="32" stroke-linecap="round" stroke-linejoin="round" />
+    <line x1="25" y1="155" x2="175" y2="155" stroke="#f59e0b" stroke-width="16" stroke-linecap="round" />
+    <line x1="115" y1="50" x2="115" y2="260" stroke="#f59e0b" stroke-width="16" stroke-opacity="0.6" stroke-linecap="round" />
+    <circle cx="145" cy="155" r="22" fill="#fbbf24" />
+  </g>
+
+  <text x="256" y="380" font-family="system-ui, -apple-system, sans-serif" font-size="30" font-weight="900" letter-spacing="6" fill="#f59e0b" text-anchor="middle">DEMASH</text>
+</svg>
