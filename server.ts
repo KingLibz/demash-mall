@@ -2205,6 +2205,115 @@ _Demash Corporate Operations Desk_`;
 });
 
 // ==============================================================================
+// 2C-A3. DEDICATED SOVEREIGN WHATSAPP ROUTER & META CLOUD API DISPATCHER
+// ==============================================================================
+export interface WhatsAppDispatchRecord {
+  id: string;
+  recipient: string;
+  recipientName?: string;
+  message: string;
+  channel: 'META_CLOUD_API' | 'WA_ME_DIRECT_PROTOCOL';
+  status: 'SENT' | 'QUEUED' | 'LINK_GENERATED';
+  timestamp: string;
+  directWaMeUrl: string;
+}
+
+const whatsappDispatchLogs: WhatsAppDispatchRecord[] = [];
+
+export async function dispatchWhatsAppPayload(toPhone: string, textMessage: string, recipientName?: string) {
+  const cleanPhone = toPhone.replace(/[^0-9]/g, '');
+  const encodedText = encodeURIComponent(textMessage);
+  const directWaMeUrl = `https://wa.me/${cleanPhone}?text=${encodedText}`;
+  const dispatchId = `WA-DISP-${Date.now().toString().slice(-8)}`;
+
+  const token = process.env.WHATSAPP_ACCESS_TOKEN || process.env.META_ACCESS_TOKEN;
+  const phoneId = process.env.WHATSAPP_PHONE_NUMBER_ID || process.env.META_PHONE_ID || "109283746561234";
+
+  let sentViaApi = false;
+  let apiError: string | null = null;
+
+  if (token && phoneId) {
+    try {
+      const response = await axios.post(
+        `https://graph.facebook.com/v19.0/${phoneId}/messages`,
+        {
+          messaging_product: "whatsapp",
+          to: cleanPhone,
+          type: "text",
+          text: { body: textMessage }
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json"
+          },
+          timeout: 8000
+        }
+      );
+      if (response.data && response.data.messages) {
+        sentViaApi = true;
+      }
+    } catch (err: any) {
+      apiError = err.response?.data?.error?.message || err.message;
+    }
+  }
+
+  const record: WhatsAppDispatchRecord = {
+    id: dispatchId,
+    recipient: cleanPhone,
+    recipientName: recipientName || (cleanPhone === "263784219178" ? "Director Liberman Magaya" : cleanPhone === "263772608954" ? "Chief Treasurer E.M. Magaya" : "Client"),
+    message: textMessage,
+    channel: sentViaApi ? 'META_CLOUD_API' : 'WA_ME_DIRECT_PROTOCOL',
+    status: sentViaApi ? 'SENT' : 'LINK_GENERATED',
+    timestamp: new Date().toISOString(),
+    directWaMeUrl
+  };
+
+  whatsappDispatchLogs.unshift(record);
+  if (whatsappDispatchLogs.length > 100) whatsappDispatchLogs.pop();
+
+  return {
+    success: true,
+    sentViaApi,
+    apiError,
+    record
+  };
+}
+
+// POST /api/v1/whatsapp/dispatch - Universal WhatsApp dispatch endpoint
+app.post('/api/v1/whatsapp/dispatch', async (req, res) => {
+  try {
+    const { to = "+263784219178", message, recipientName } = req.body || {};
+    if (!message) {
+      return res.status(400).json({ success: false, error: "Parameter 'message' is required." });
+    }
+
+    const result = await dispatchWhatsAppPayload(to, message, recipientName);
+    res.json({
+      message: `WhatsApp payload processed for ${result.record.recipientName} (${result.record.recipient}).`,
+      ...result
+    });
+  } catch (err: any) {
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+// GET /api/v1/whatsapp/status - Check WhatsApp service readiness
+app.get('/api/v1/whatsapp/status', (req, res) => {
+  const token = process.env.WHATSAPP_ACCESS_TOKEN || process.env.META_ACCESS_TOKEN;
+  res.json({
+    success: true,
+    service: "Demash WhatsApp Sovereign Dispatch Engine",
+    cloudApiConfigured: Boolean(token),
+    primaryDirectorLine: "+263784219178",
+    chiefTreasurerLine: "+263772608954",
+    waMeProtocolSupported: true,
+    totalDispatchesLogged: whatsappDispatchLogs.length,
+    recentDispatches: whatsappDispatchLogs.slice(0, 10)
+  });
+});
+
+// ==============================================================================
 // 2C-B. PAYPAL INTERNATIONAL COMMERCE ENGINE & DIASPORA ESCROW RAILS
 // ==============================================================================
 export interface PayPalOrder {
