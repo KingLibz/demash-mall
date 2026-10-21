@@ -1,21 +1,46 @@
-// REAL config - no mock firebase-applet-config.json
-// Uses env vars - add real values in Render Dashboard -> Environment
+import { initializeApp } from "firebase/app"
+import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "firebase/auth"
+
+// REAL Firebase config - from Render Env vars (add real tomorrow)
 const firebaseConfig = {
-  apiKey: import.meta.env.VITE_FIREBASE_API_KEY || "real-key-from-firebase-console",
-  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
-  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY || "demo-key-add-real-in-render-env",
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN || "demashglobal-live.firebaseapp.com",
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID || "demashglobal-live",
   storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
   messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
   appId: import.meta.env.VITE_FIREBASE_APP_ID
 }
 
-// If no env, use demashglobal.live real project (add tomorrow)
-export const getAuthConfig = () => {
-  if (!firebaseConfig.apiKey || firebaseConfig.apiKey.includes("real-key")) {
+const app = initializeApp(firebaseConfig)
+const auth = getAuth(app)
+const provider = new GoogleAuthProvider()
+
+// REQUIRED EXPORTS - fixes Build failed
+export const initAuth = (callback: (user: any) => void) => {
+  return onAuthStateChanged(auth, callback)
+}
+
+export const googleSignIn = async () => {
+  try {
+    const result = await signInWithPopup(auth, provider)
+    return { user: result.user, isReal: true }
+  } catch (e: any) {
     console.log("Add real Firebase config in Render Env for global marketing")
-    return { isReal: false, note: "Add real Firebase config - no mock" }
+    return { user: null, isReal: false, error: e.message }
   }
-  return { isReal: true, config: firebaseConfig }
+}
+
+export const logout = async () => {
+  try {
+    await signOut(auth)
+    return { success: true }
+  } catch (e: any) {
+    return { success: false, error: e.message }
+  }
+}
+
+export const getAuthConfig = () => {
+  return { isReal: !firebaseConfig.apiKey.includes("demo-key"), config: firebaseConfig }
 }
 
 export default firebaseConfig
