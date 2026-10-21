@@ -78,8 +78,7 @@ export const PaymentsAndPublicPortal: React.FC<Props> = ({ onOpenDirectorModal }
     company: "ZimPropel",
     paymentLink: "Demash Global",
     integrationId: "27382",
-    integrationKey: "a19f4a0f-19a7-4910-a973-c1be75a8efaa",
-    corporateEcoCash: "+263784219178",
+    integrationKey: "SECURED_BACKEND_ONLY",
     comptrollerEmail: "libermanmagaya@gmail.com",
     agriBankNostro: "AgriBank Commercial Nostro Gateway"
   };
@@ -1545,14 +1544,14 @@ export const PaymentsAndPublicPortal: React.FC<Props> = ({ onOpenDirectorModal }
               <div className="flex items-center justify-between">
                 <span className="text-[10px] text-slate-400 uppercase block">Integration Key (SHA-512 Hash)</span>
                 <button
-                  onClick={() => copyToClipboard(paynowConfig.integrationKey, 'paynowKey')}
+                  onClick={() => copyToClipboard('SECURED', 'paynowKey')}
                   className="text-cyan-400 hover:text-cyan-300 text-[10px] flex items-center gap-1 cursor-pointer"
                 >
                   {copiedField === 'paynowKey' ? <Check className="w-3 h-3 text-emerald-400" /> : <Copy className="w-3 h-3" />}
                   <span>{copiedField === 'paynowKey' ? 'Copied' : 'Copy Key'}</span>
                 </button>
               </div>
-              <span className="text-cyan-300 font-bold block truncate">{paynowConfig.integrationKey}</span>
+              <span className="text-cyan-300 font-bold block truncate">***SECURED - Backend Only***</span>
               <span className="text-[10px] text-slate-500">a19f4a0f-19a7-4910-a973-c1be75a8efaa</span>
             </div>
 
@@ -1570,7 +1569,7 @@ export const PaymentsAndPublicPortal: React.FC<Props> = ({ onOpenDirectorModal }
             </div>
             <div className="space-y-0.5 text-right">
               <span className="text-slate-400 block text-[10px]">Executive Comptroller</span>
-              <span className="text-white font-bold">Director Liberman Magaya ({paynowConfig.comptrollerEmail})</span>
+              <span className="text-white font-bold">Director Liberman Magaya (Secured)</span>
             </div>
           </div>
         </div>
