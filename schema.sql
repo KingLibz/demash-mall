@@ -3,7 +3,7 @@
 -- DATABASE: demash_automation_db
 -- REPOSITORY: /home/ubuntu/demash-engine-root/
 -- ARCHITECTURE: Sovereign Array Modules 133 through 6132
--- TREASURY: AgriBank Zimbabwe Nostro (100007665703) | EcoCash (+263784219178)
+-- TREASURY: AgriBank Zimbabwe Nostro (AgriBank Commercial Nostro Gateway) | EcoCash (+263784219178)
 -- ==============================================================================
 
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
@@ -170,9 +170,9 @@ ON CONFLICT (sku) DO NOTHING;
 
 INSERT INTO supplier_alliances (supplier_id, supplier_name, affiliate_token, contractual_commission_percentage, payout_settlement_route)
 VALUES
-('SUP-AHM-01', 'AHM Heavy Equipment & Machinery Corp', 'ref=mnpixfvf', 10.00, 'AgriBank Zimbabwe (100007665703)'),
-('SUP-SOL-02', 'SolarFlow Global Component Fabricators', 'ref=mnpixfvf', 12.50, 'AgriBank Zimbabwe (100007665703)'),
-('SUP-PMP-03', 'Apex Hydrology & Commercial Pool Pumps', 'ref=mnpixfvf', 15.00, 'AgriBank Zimbabwe (100007665703)')
+('SUP-AHM-01', 'AHM Heavy Equipment & Machinery Corp', 'ref=mnpixfvf', 10.00, 'AgriBank Zimbabwe (AgriBank Commercial Nostro Gateway)'),
+('SUP-SOL-02', 'SolarFlow Global Component Fabricators', 'ref=mnpixfvf', 12.50, 'AgriBank Zimbabwe (AgriBank Commercial Nostro Gateway)'),
+('SUP-PMP-03', 'Apex Hydrology & Commercial Pool Pumps', 'ref=mnpixfvf', 15.00, 'AgriBank Zimbabwe (AgriBank Commercial Nostro Gateway)')
 ON CONFLICT (supplier_id) DO NOTHING;
 
 -- Initial automation audit logs for progressive learning calibrator baseline

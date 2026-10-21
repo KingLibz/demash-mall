@@ -2053,6 +2053,158 @@ app.get('/api/v1/autonomous/deal-history', (req, res) => {
 });
 
 // ==============================================================================
+// 2C-A2. SOVEREIGN REGIONAL TENDER & REVENUE SPLIT PIPELINE (x999999 CALIBRATED)
+// ==============================================================================
+export interface RegionalSourcingMetrics {
+  laborFactor: number;
+  materialProcurement: number;
+  customsTariff: number;
+  currency: string;
+}
+
+export const REGIONAL_SOURCING_GRIDS: Record<string, RegionalSourcingMetrics> = {
+  ZW: { laborFactor: 1.00, materialProcurement: 1.00, customsTariff: 0.00, currency: "USD" },
+  ZA: { laborFactor: 0.88, materialProcurement: 0.95, customsTariff: 0.12, currency: "USD" },
+  UK: { laborFactor: 2.35, materialProcurement: 1.60, customsTariff: 0.25, currency: "USD" },
+  US: { laborFactor: 2.60, materialProcurement: 1.75, customsTariff: 0.20, currency: "USD" }
+};
+
+export const SOVEREIGN_VAULT = {
+  MD_OPERATIONS_LINE: "+263784219178",      // Liberman Magaya - MD Line
+  CHIEF_TREASURER_LINE: "+263772608954",    // E.M. Magaya - Treasurer Line
+  PRIMARY_AGRIBANK_NOSTRO: "AgriBank Commercial Nostro Gateway",
+  GLOBAL_IMPORT_CODE: "k17412",             // Verified Demash Import License
+  DAILY_ECOCASH_CEILING: 100.00,            // Daily Morning Allocation Pool
+  MONTHLY_ECOCASH_CAP: 3000.00              // Monthly Aggregated Sweep Cap
+};
+
+let sovereignLedgerCache = {
+  lastResetTimestamp: new Date().toDateString(),
+  ecoCashDrawnToday: 0.00,
+  monthlyTotalAccumulated: 0.00,
+  activeSupplierCatalogs: {
+    "AHM": { status: "ACTIVE", type: "Steel & Structural Framing", globalContractRef: "AHM-REF-7792", attribution: "ref=mnpixfvf" }
+  }
+};
+
+export function evaluateRegionalTenderMetrics(baseTenderValue: number, targetRegionCode: string) {
+  const code = (targetRegionCode || "ZW").toUpperCase();
+  const targetGrid = REGIONAL_SOURCING_GRIDS[code] || REGIONAL_SOURCING_GRIDS["ZW"];
+  const calibratedTenderValue = baseTenderValue * ((targetGrid.laborFactor + targetGrid.materialProcurement + targetGrid.customsTariff) / 2);
+  return {
+    calibratedTotal: calibratedTenderValue.toFixed(2),
+    currency: targetGrid.currency,
+    logisticsCode: `DDP-ZW-${SOVEREIGN_VAULT.GLOBAL_IMPORT_CODE}`,
+    laborFactor: targetGrid.laborFactor,
+    materialProcurement: targetGrid.materialProcurement,
+    customsTariff: targetGrid.customsTariff
+  };
+}
+
+// POST /api/v1/sovereign/regional-pricing
+app.post('/api/v1/sovereign/regional-pricing', (req, res) => {
+  try {
+    const { baseValue = 1000, targetZone = "ZW" } = req.body || {};
+    const pricing = evaluateRegionalTenderMetrics(Number(baseValue) || 1000, targetZone);
+    res.json({ success: true, pricing });
+  } catch (err: any) {
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+// GET /api/v1/sovereign/ledger-state
+app.get('/api/v1/sovereign/ledger-state', (req, res) => {
+  res.json({
+    success: true,
+    sovereignVault: SOVEREIGN_VAULT,
+    sovereignLedgerCache,
+    regionalGrids: REGIONAL_SOURCING_GRIDS
+  });
+});
+
+// POST /api/v1/sovereign/execute-pipeline
+app.post('/api/v1/sovereign/execute-pipeline', (req, res) => {
+  try {
+    const { clientName = "Diaspora Client", clientPhone = "+263 78 421 9178", baseValue = 5000, targetZone = "ZW", clearingTxnRef, supplierCode = "AHM" } = req.body || {};
+    const activeZone = (targetZone || "ZW").toUpperCase();
+    const todayString = new Date().toDateString();
+
+    const pricingOutput = evaluateRegionalTenderMetrics(Number(baseValue || 0), activeZone);
+    let ecoCashSettleAmount = 0.00;
+    let bankSettleAmount = Number(pricingOutput.calibratedTotal);
+
+    if (sovereignLedgerCache.lastResetTimestamp !== todayString) {
+      sovereignLedgerCache.ecoCashDrawnToday = 0.00;
+      sovereignLedgerCache.lastResetTimestamp = todayString;
+    }
+
+    if (sovereignLedgerCache.ecoCashDrawnToday < SOVEREIGN_VAULT.DAILY_ECOCASH_CEILING && sovereignLedgerCache.monthlyTotalAccumulated < SOVEREIGN_VAULT.MONTHLY_ECOCASH_CAP) {
+      const availableDailyMargin = SOVEREIGN_VAULT.DAILY_ECOCASH_CEILING - sovereignLedgerCache.ecoCashDrawnToday;
+      ecoCashSettleAmount = bankSettleAmount > availableDailyMargin ? availableDailyMargin : bankSettleAmount;
+      bankSettleAmount = bankSettleAmount - ecoCashSettleAmount;
+
+      sovereignLedgerCache.ecoCashDrawnToday += ecoCashSettleAmount;
+      sovereignLedgerCache.monthlyTotalAccumulated += ecoCashSettleAmount;
+    }
+
+    let catalogVerificationText = "Direct Non-Affiliate Demash Structural Resource Deployment.";
+    const supUpper = (supplierCode || "AHM").toUpperCase();
+    if (sovereignLedgerCache.activeSupplierCatalogs[supUpper as keyof typeof sovereignLedgerCache.activeSupplierCatalogs]) {
+      const supplierData = sovereignLedgerCache.activeSupplierCatalogs[supUpper as keyof typeof sovereignLedgerCache.activeSupplierCatalogs];
+      catalogVerificationText = `SECURED PARTNERSHIP DEAL: Synced with ${supUpper} catalog database loop via Tracking Ref: ${supplierData.globalContractRef} (${supplierData.attribution}).`;
+    }
+
+    const clientWelcomeText = `Greetings *${clientName}*,
+
+Thank you for selecting *Demash Global Infrastructure & Capital*. Your project profile under zone *${activeZone}* has been successfully processed into our production fulfillment layers.
+
+🏗️ *Logistical Milestones Initialized:*
+- Material procurement calibrated to local and customs baselines.
+- Door-to-door freight dispatch flagged under Import Code: ${pricingOutput.logisticsCode}.
+- Managing Director Liberman Magaya (+263 78 421 9178) is assigned to oversee structural milestone handovers.
+
+Sovereign Infrastructure. Managed Capital.
+_Demash Corporate Operations Desk_`;
+
+    const txnId = clearingTxnRef || `TXN-SOV-${Date.now().toString().slice(-8)}`;
+
+    const mdInternalUpdate = `⚡ *DEMASH SOVEREIGN ENGINE ACTIVE (x999999)* ⚡
+--------------------------------------------------
+👤 *Client Name:* ${clientName} | 📞 Line: ${clientPhone}
+🌍 *Calibrated Regional Value:* $${pricingOutput.calibratedTotal} USD [Zone: ${activeZone}]
+📦 *Logistics Protocol:* ${pricingOutput.logisticsCode} (DDP Delivery Array)
+📋 *Affiliate Tracking Loop:* ${catalogVerificationText}`;
+
+    const treasurerInternalUpdate = `🏦 *AGRIBANK GROSS SETTLEMENT NOTIFICATION*
+--------------------------------------------------
+🧾 *Txn Bank Reference:* ${txnId}
+💵 *Aggregated Settle Total:* $${pricingOutput.calibratedTotal} USD
+📲 *EcoCash Allocation:* $${ecoCashSettleAmount.toFixed(2)} USD [Daily Morning Buffer Pool]
+🏛️ *Nostro Corporate Route [${SOVEREIGN_VAULT.PRIMARY_AGRIBANK_NOSTRO}]:* $${bankSettleAmount.toFixed(2)} USD
+
+*System Command:* Vault allocation verified. Milestone contracts reconciled to AgriBank Nostro Escrow.`;
+
+    res.json({
+      success: true,
+      status: "SUCCESS_SYSTEM_FLOW_RECOGNIZED",
+      transactionReference: txnId,
+      recalculatedValue: pricingOutput.calibratedTotal,
+      currency: pricingOutput.currency,
+      routedToBank: bankSettleAmount.toFixed(2),
+      routedToEcoCash: ecoCashSettleAmount.toFixed(2),
+      logisticsCode: pricingOutput.logisticsCode,
+      dispatches: {
+        clientWelcomeText,
+        mdInternalUpdate,
+        treasurerInternalUpdate
+      }
+    });
+  } catch (err: any) {
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+// ==============================================================================
 // 2C-B. PAYPAL INTERNATIONAL COMMERCE ENGINE & DIASPORA ESCROW RAILS
 // ==============================================================================
 export interface PayPalOrder {

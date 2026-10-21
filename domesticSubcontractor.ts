@@ -17,7 +17,7 @@
  * Retains your net broker margin. Contractors execute on-ground.
  *                       │
  *                       ▼
- * [ Escrow & Milestone Payments Clear to AgriBank: 100007665703 ]
+ * [ Escrow & Milestone Payments Clear to AgriBank Nostro Gateway ]
  *                       │
  *                       ▼ (Daily 20:50 PM Automated Release Run)
  * [ Paynow Remittance Driver Drops $300.00 USD Cash to EcoCash ]
@@ -43,7 +43,7 @@ dbPool.on('error', (err) => {
 export const VAULT_TREASURY = {
   mdWhatsApp: "+263784219178",
   metaPhoneId: process.env.META_PHONE_ID || "109283746561234",
-  agriBankAccount: "100007665703",
+  agriBankAccount: "AgriBank Commercial Nostro Gateway",
   managingDirector: "Director Liberman Magaya"
 };
 

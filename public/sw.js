@@ -50,7 +50,7 @@ self.addEventListener('fetch', (event) => {
           success: false, 
           offline: true, 
           message: 'Demash Global is running offline. Cached records and live operations will re-sync upon reconnection.',
-          cachedTreasury: 'AgriBank Zimbabwe Nostro 100007665703'
+          cachedTreasury: 'AgriBank Zimbabwe Commercial Nostro Gateway'
         }), {
           headers: { 'Content-Type': 'application/json' }
         });
