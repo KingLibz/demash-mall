@@ -342,7 +342,7 @@ export default function CrossBorderProcurementPanel() {
                 className="w-full px-3 py-2 bg-slate-950 border border-slate-800 rounded-xl text-xs text-white focus:border-indigo-400 outline-none"
               >
                 <option value="AUTO">AUTO (Threshold Sentry)</option>
-                <option value="SUBCONTRACT_TIER1">TIER-1 SUBCONTRACT (Modules 5133-6132)</option>
+                <option value="SUBCONTRACT_TIER1">TIER-1 SUBCONTRACT (Modules REAL-MODULE)</option>
                 <option value="DIRECT_INTERNAL">DIRECT DEMASH (100% Retained)</option>
               </select>
             </div>
