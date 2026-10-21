@@ -1,3 +1,4 @@
+import RealMarketingHero from "./components/RealMarketingHero";
 /**
  * @license
  * SPDX-License-Identifier: Apache-2.0
