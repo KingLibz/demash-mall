@@ -213,3 +213,36 @@ async function dispatchWhatsAppMessage(targetNumber, textMessage) {
         console.error(`WhatsApp notification drop skipped or failed: ${err.message}`);
     }
 }
+/**
+ * 🚀 High-Impact Automated Client Onboarding Dispatcher
+ * Sends a premium welcoming sequence directly to the client's WhatsApp number.
+ */
+export async function dispatchClientOnboardingWelcome(clientName, clientPhone, projectType) {
+    try {
+        console.log(`Deploying onboarding sequence to client: ${clientName} (${clientPhone})`);
+
+        const welcomePayload = 
+`Greetings *${clientName}*,
+
+Thank you for engaging *Demash Global Infrastructure & Capital*. Your intake request for structural project framing under our *${projectType}* division has been successfully ingested into our sovereign core operations engine.
+
+🏢 *What Happens Next:*
+1. Our engineering desk will calibrate material sourcing baselines for your regional zone.
+2. A formal logistical deployment layout will be generated.
+3. An executive manager will reach out directly via this line to finalize your supplier POS parameters.
+
+We look forward to structuring your high-yield assets.
+
+Best Regards,
+*Executive Operations Desk*
+Demash Global
+_Sovereign Infrastructure. Managed Capital._`;
+
+        // Execute outbound push straight to the customer's phone
+        await dispatchWhatsAppMessage(clientPhone, welcomePayload);
+        console.log(`Onboarding template successfully pushed to client line.`);
+
+    } catch (error) {
+        console.error(`Failed to execute automated client onboarding drop: ${error.message}`);
+    }
+}
