@@ -1,12 +1,10 @@
 /**
  * ================================================================================
  * 👑 DEMASH GLOBAL INFRASTRUCTURE & CAPITAL
- * AUTONOMOUS TRADE, SOURCING & INTENT FIREWALL MASTER PRODUCTION MONOLITH
  * ================================================================================
  * Primary Workshop Base: K17412, Katanga, Norton, Zimbabwe
  * Sovereign Domain:      demashglobal.live
  * Comptroller / MD:     Director Liberman Magaya (+263 78 421 9178)
- * Bank Settlement Rail: AgriBank Commercial Nostro Escrow Gateway
  * ================================================================================
  */
 
@@ -269,7 +267,6 @@ _Sovereign Cloud Matrix Engine. Running completely hands-off on ${SYSTEM_CONFIG.
 }
 
 // ================================================================================
-// 🔥 MODULE 7: STRICT 100% INTENT FIREWALL & AI STUDIO DISPATCHER
 // ================================================================================
 
 export interface LeadBufferRecord {
@@ -362,10 +359,8 @@ export async function executeFunctionalIntakePipeline(input: { clientName: strin
     from: `"Demash Global Core Intelligence" <${SYSTEM_CONFIG.GMAIL_USER}>`,
     to: finalRecipient,
     cc: SYSTEM_CONFIG.GMAIL_USER,
-    subject: `🔥 [100% INTENT VERIFIED] Live Client Lead: ${clientName} -> ${analysis.targetCorporateDesk}`,
     html: `
       <div style="font-family: Arial, sans-serif; background: #0f172a; color: #f8fafc; padding: 24px; border-radius: 8px;">
-        <h2 style="color: #38bdf8; margin-top: 0;">Demash Global 100% Intent Firewall Clearance</h2>
         <p style="color: #94a3b8; font-size: 14px;">Lead verified at <strong>100% Intent Intensity</strong>.</p>
         <table style="width: 100%; border-collapse: collapse; margin: 20px 0; background: #1e293b; border-radius: 6px;">
           <tr><td style="padding: 10px; font-weight: bold; color: #cbd5e1;">Client Name:</td><td style="padding: 10px; color: #38bdf8;">${clientName}</td></tr>
@@ -374,7 +369,6 @@ export async function executeFunctionalIntakePipeline(input: { clientName: strin
           <tr><td style="padding: 10px; font-weight: bold; color: #cbd5e1;">Intent Score:</td><td style="padding: 10px; color: #38bdf8;">100% (Budget: 40 | Buying: 30 | Spec: 30)</td></tr>
           <tr><td style="padding: 10px; font-weight: bold; color: #cbd5e1;">Raw Text:</td><td style="padding: 10px; color: #f8fafc;">${clientMessage}</td></tr>
         </table>
-        <p style="font-size: 11px; color: #64748b;">Demash Global Autonomous Gateway | Comptroller: Director Liberman Magaya | AgriBank Commercial Nostro Escrow Gateway</p>
       </div>`
   };
 

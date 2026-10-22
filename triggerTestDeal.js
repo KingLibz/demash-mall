@@ -2,7 +2,6 @@ import { processUnifiedEcosystemPipeline, dispatchClientOnboardingWelcome, execu
 
 // REAL-WORLD PRODUCTION EXECUTION DATA
 const incomingDeal = {
-    clientName: "Tinashe Moyo",          // Client
     clientPhone: "+263784219178",        // Target customer phone number
     rawWorth: "1250.00",                 // Total transaction bill value
     region: "ZW",                        // Local country marker

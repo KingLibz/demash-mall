@@ -17,7 +17,6 @@
  * Retains your net broker margin. Contractors execute on-ground.
  *                       │
  *                       ▼
- * [ Escrow & Milestone Payments Clear to AgriBank Nostro Gateway ]
  *                       │
  *                       ▼ (Daily 20:50 PM Automated Release Run)
  * [ Paynow Remittance Driver Drops $300.00 USD Cash to EcoCash ]

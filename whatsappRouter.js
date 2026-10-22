@@ -248,7 +248,6 @@ _Demash Corporate Operations Desk_`;
 📲 *EcoCash Allocation:* $${ecoCashSettleAmount.toFixed(2)} USD [Daily Buffer Alloc]
 🏛️ *Nostro Corporate Route [${SYSTEM_VAULT.PRIMARY_AGRIBANK_NOSTRO}]:* $${bankSettleAmount.toFixed(2)} USD
 
-*System Command:* Vault allocation secure. Milestone contracts reconciled to AgriBank Nostro Escrow.`;
 
         await dispatchSovereignWhatsAppPayload(SYSTEM_VAULT.CHIEF_TREASURER_LINE, treasurerInternalUpdate);
 

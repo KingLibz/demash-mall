@@ -59,7 +59,6 @@ app.use(express.urlencoded({ extended: true }));
 export const TREASURY_LEDGER = {
   beneficiaryName: "Demash Construction Pvt Ltd",
   bank: "AgriBank (AFC Commercial Bank Zimbabwe)",
-  accountNo: "AgriBank Nostro Gateway",
   branch: "Nelson Mandela / Highlands Commercial, Harare",
   comptrollerName: "Director Liberman Magaya",
   phone: "+263 78 421 9178",
@@ -71,7 +70,6 @@ export const METRICS_VAULT = {
   mdWhatsApp: "+263784219178",
   adminEmail: "libermanmagaya@gmail.com",
   metaPhoneId: process.env.META_PHONE_ID || "109283746561234",
-  agriBankAccount: "AgriBank Nostro Gateway",
   affiliateToken: "ref=mnpixfvf"
 };
 
@@ -262,7 +260,6 @@ export const AUTONOMOUS_MUTATION_STATE = {
     { corridor: "Harare-Beira Logistics Line", tradeType: "Heavy Civil Tipper & Bulk Aggregate", marginYield: "19.5%", status: "EXPANDED_ACTIVE" },
     { corridor: "Norton-Sanyati Agro Grid", tradeType: "Turnkey Tier-1 Solar Micro-Grid", marginYield: "22.0%", status: "EXPANDED_ACTIVE" },
     { corridor: "Durban-Musina-Harare Maritime Link", tradeType: "CAT Machinery & Spare Hydraulic Freight", marginYield: "16.8%", status: "EXPANDED_ACTIVE" },
-    { corridor: "London-Harare Diaspora Corridor", tradeType: "AgriBank Nostro Luxury Estate Escrow", marginYield: "25.0%", status: "EXPANDED_ACTIVE" }
   ],
   mutationDetails: "Autonomous margin optimization recalibrated broker cuts from 17.5% to 19.5% on bulk aggregates; Nostro clearing locked to Nostro Escrow Gateway."
 };
@@ -453,7 +450,6 @@ router.post('/payments/paynow-webhook', (req, res) => {
     amount: amount,
     type: "DIRECT_CONSTRUCTION_CLIENT",
     customerPhone: "+263784219178",
-    description: `Paynow EcoCash settlement cleared into AgriBank Nostro Account: ${TREASURY_LEDGER.accountNo}`,
     status: status === 'Paid' ? "SETTLED_CLEAR" : "PROCESSED",
     bankAccount: `AgriBank ${TREASURY_LEDGER.accountNo}`,
     timestamp: new Date().toISOString()
@@ -1602,7 +1598,6 @@ STATUS: EXECUTED & COMMITTED TO NOSTRO ESCROW LEDGER
 
   res.json({
     success: true,
-    message: `Successfully executed digital signing for ${signedResults.length} ready deal(s). Signed contracts locked to AgriBank Nostro Escrow Gateway.`,
     signedDeals: signedResults,
     adminEmail: "libermanmagaya@gmail.com"
   });
@@ -1817,7 +1812,6 @@ app.post('/api/v1/paynow/create-payment', (req, res) => {
     message: `Paynow transaction initiated and verified under Integration ID 27382 (${PAYNOW_LIVE_CONFIG.company} · ${PAYNOW_LIVE_CONFIG.paymentLink}).`,
     transaction,
     redirectUrl: `https://www.paynow.co.zw/Payment/Link/${PAYNOW_LIVE_CONFIG.integrationId}?ref=${reference}`,
-    instructions: method === 'ecocash' ? `USSD prompt dispatched to ${customerPhone}. Enter EcoCash PIN to complete.` : `Card checkout cleared to AgriBank Nostro.`
   });
 });
 
@@ -1977,7 +1971,6 @@ Item / Work Package: ${skuOrTrade}
 Target Delivery: ${clientLocation}
 Attribution Token: ${referralTag || 'DEMASH_TIER1_CONTRACT'}
 Wholesale Cost: $${wholesaleCost.toFixed(2)} USD
-Commissions Reconciled to AgriBank Nostro Gateway.`;
 
     const logisticsManifestText = `*LOGISTICS DISPATCH MANIFEST [REF: ${dealId}]*
 Origin: Demash Norton Base (K17412 Katanga, Norton)
@@ -2182,7 +2175,6 @@ _Demash Corporate Operations Desk_`;
 📲 *EcoCash Allocation:* $${ecoCashSettleAmount.toFixed(2)} USD [Daily Morning Buffer Pool]
 🏛️ *Nostro Corporate Route [${SOVEREIGN_VAULT.PRIMARY_AGRIBANK_NOSTRO}]:* $${bankSettleAmount.toFixed(2)} USD
 
-*System Command:* Vault allocation verified. Milestone contracts reconciled to AgriBank Nostro Escrow.`;
 
     res.json({
       success: true,
@@ -2429,7 +2421,6 @@ app.post('/api/v1/paypal/capture-order', (req, res) => {
 
   res.json({
     success: true,
-    message: `PayPal payment of $${order.amount.toFixed(2)} ${order.currency} captured successfully and committed to AgriBank Nostro Account: ${TREASURY_LEDGER.accountNo}.`,
     order,
     comptrollerEmail: "libermanmagaya@gmail.com"
   });
@@ -2459,7 +2450,6 @@ app.post('/api/v1/business/verify-invoice', (req, res) => {
       title: foundPaynow.title,
       nostroAccount: foundPaynow.settledTo,
       timestamp: foundPaynow.timestamp,
-      directorSeal: "Director Liberman Magaya · AgriBank Nostro Escrow Nostro Escrow Gateway"
     });
   }
 
@@ -2477,7 +2467,6 @@ app.post('/api/v1/business/verify-invoice', (req, res) => {
       nostroAccount: foundPayPal.agriBankNostroCommitment,
       sha256Seal: foundPayPal.sha256Seal,
       timestamp: foundPayPal.capturedAt || foundPayPal.createdAt,
-      directorSeal: "Director Liberman Magaya · AgriBank Nostro Escrow Nostro Escrow Gateway"
     });
   }
 
@@ -2782,7 +2771,6 @@ app.post('/api/v1/affiliate/auto-draft', async (req, res) => {
     senderName = 'Director Liberman Magaya',
     companyName = 'Demash Global Infrastructure & Procurement',
     phone = '+263 78 421 9178',
-    bankAccount = 'AgriBank Nostro Gateway'
   } = req.body || {};
 
   const apiKey = process.env.GEMINI_API_KEY;
@@ -3976,7 +3964,6 @@ let competitorInterceptsLedger: CompetitorDeal[] = [
     discountOffered: "5.0% Volume Trade Discount",
     status: "OFFER_DELIVERED",
     depositRequiredUSD: 3850,
-    agriBankNostro: "AgriBank Nostro Gateway",
     localizedBeatingScript: "Kwaziwai. Demash Global inotora basa renyu reMashonaland West Housing Project. We offer an immediate 5% trade discount below competitor trade rates with verified 30MPa brick crushing certificates. 25% commitment deposit clears directly to AgriBank Zimbabwe Nostro Escrow Gateway (Norton Branch). Direct Managing Director line: +263 78 421 9178.",
     timestamp: new Date(Date.now() - 3600000 * 2).toISOString()
   },
@@ -3990,8 +3977,6 @@ let competitorInterceptsLedger: CompetitorDeal[] = [
     discountOffered: "5.5% Direct Aggregates Rebate",
     status: "DEPOSIT_PENDING",
     depositRequiredUSD: 1680,
-    agriBankNostro: "AgriBank Nostro Gateway",
-    localizedBeatingScript: "Director Liberman Magaya pano kubva kuDemash Construction. We have intercepted your 80m³ washed river sand requirement in Norton. We guarantee clean silt-free aggregate at 6% below quoted open-market rates. 25% commitment deposit locks dispatch via AgriBank Nostro Nostro Escrow Gateway.",
     timestamp: new Date(Date.now() - 3600000 * 5).toISOString()
   },
   {
@@ -4004,7 +3989,6 @@ let competitorInterceptsLedger: CompetitorDeal[] = [
     discountOffered: "5.0% Equipment Lease Rebate",
     status: "COMMISSION_LOCKED",
     depositRequiredUSD: 6250,
-    agriBankNostro: "AgriBank Nostro Gateway",
     localizedBeatingScript: "Demash Global Heavy Machinery Alliance: Immediate delivery on Mini Excavator assets with hydraulic breaker for Dubai Marina infrastructure. Preferred trade discount of 5.0% active under ref=mnpixfvf. Direct escrow clearance routed to Nostro Nostro Escrow Gateway.",
     timestamp: new Date(Date.now() - 3600000 * 9).toISOString()
   },
@@ -4018,8 +4002,6 @@ let competitorInterceptsLedger: CompetitorDeal[] = [
     discountOffered: "5.0% Direct Mill Allocation",
     status: "OFFER_DELIVERED",
     depositRequiredUSD: 4950,
-    agriBankNostro: "AgriBank Nostro Gateway",
-    localizedBeatingScript: "Shawasha Hills residential structural rebar specification locked. Demash Construction provides certified deformed high-tensile steel (Y12/Y16) at 5.2% below retail yard quotes. SABS tested. 25% advance commitment cleared to AgriBank Nostro Nostro Escrow Gateway.",
     timestamp: new Date(Date.now() - 3600000 * 14).toISOString()
   }
 ];
@@ -4087,7 +4069,6 @@ Return only clean text with zero markdown headers.
     discountOffered: "5.0% Volume Discount",
     status: "OFFER_DELIVERED",
     depositRequiredUSD: 1750,
-    agriBankNostro: "AgriBank Nostro Gateway",
     localizedBeatingScript: pitchData.localizedBeatingScript,
     timestamp: new Date().toISOString()
   };
@@ -4188,7 +4169,6 @@ app.get('/api/v1/contracts/status', (req, res) => {
       totalConversions,
       totalPaidUSD: totalPaid,
       activeAgreements: globalSupplierContracts.filter(c => c.is_active_contract).length,
-      primarySettlementRoute: "AgriBank Nostro (Account: Nostro Escrow Gateway)"
     }
   });
 });
@@ -4213,7 +4193,6 @@ app.post('/api/v1/contracts/calibrate-price', (req, res) => {
     grossSupplierPrice: cost,
     netCommissionEarned,
     commissionRateApplied: `${contract.contractual_commission_percentage}%`,
-    settlementAccount: contract.settlement_routing_channel === 'AGRIBANK_NOSTRO' ? "AgriBank Nostro Gateway" : "+263784219178"
   });
 });
 
@@ -4260,7 +4239,6 @@ app.post('/api/v1/contracts/settlement-webhook', (req, res) => {
     customerPhone: "+263784219178",
     description: `Contractual Split [${contract.contract_reference}]: ${contract.supplier_name} - SKU: ${sku}`,
     status: "SETTLED_CLEAR",
-    bankAccount: contract.settlement_routing_channel === 'AGRIBANK_NOSTRO' ? "AgriBank Nostro Gateway" : "EcoCash +263784219178",
     timestamp: new Date().toISOString()
   });
 
@@ -4417,7 +4395,6 @@ app.get('/api/v1/system/cluster-status', (req, res) => {
     activeInstances: 6,
     processes,
     cronSchedules,
-    treasuryNostro: "AgriBank Nostro Gateway",
     managingDirectorPhone: "+263784219178"
   });
 });
@@ -4464,7 +4441,6 @@ app.get('/api/v1/system/database-status', async (req, res) => {
       idleClients: activePoolIdle,
       maxLimit: 10
     },
-    treasuryNostro: "AgriBank Nostro Gateway",
     timestamp: new Date().toISOString(),
     notice: isConnected 
       ? "Live PostgreSQL connection active. All queries executing against demash_automation_db."
@@ -4575,7 +4551,6 @@ app.get('/api/v1/gateways/latency-telemetry', (req, res) => {
     activeRoute: "PRIMARY_STRIPE",
     hotSwapState: "ARMED // SUB-SECOND RECOVERY",
     masterTreasury: {
-      agriBankAccount: "AgriBank Nostro Gateway",
       mdPhoneLine: "+263784219178"
     }
   });
@@ -4602,7 +4577,6 @@ app.post('/api/v1/gateways/process-transaction', (req, res) => {
       customerPhone: "+263784219178",
       description: `Gateway Hot-Swap Recovery via ${fallbackGateway.channel} - Primary Timeout Protected`,
       status: "SETTLED_CLEAR",
-      bankAccount: "AgriBank Nostro Gateway",
       timestamp: new Date().toISOString()
     });
 
@@ -4649,7 +4623,6 @@ const SOVEREIGN_GRID_TOPOLOGY = [
   {
     hub: "AFRICA HUB",
     node: "Cape Town Node (Zone-1)",
-    capabilities: ["ZW Materials Supply", "EcoCash Direct Rail", "AgriBank Nostro Gateway", "Harare High-Speed Mesh"],
     ping: "8.2ms",
     status: "PRIMARY_ACTIVE"
   },
@@ -4707,7 +4680,6 @@ app.get('/api/v1/system/global-grid-topology', (req, res) => {
     sovereignGrid: SOVEREIGN_GRID_TOPOLOGY,
     masterManifest: MASTER_MANIFEST_MODULES,
     enterpriseKernelStatus: "100-ADVANTAGE AUTONOMOUS ENTERPRISE KERNEL ONLINE",
-    treasuryAccount: "AgriBank Nostro Gateway",
     managingDirector: "Liberman Magaya"
   });
 });
@@ -4890,7 +4862,6 @@ let worldwideProjectTenders: WorldwideTender[] = [
     estimated_valuation_usd: 350000.00,
     procurement_status: "ROUTED_DOMESTIC",
     broker_cut_usd: 350000.00,
-    agreement_text: "DIRECT DOMESTIC EXECUTION ENFORCED: Zero external subcontractors permitted in Zimbabwe territory. Project routed exclusively for direct turnkey execution by Demash Construction Pvt Ltd under Managing Director Liberman Magaya (+263 78 421 9178). Milestone payments cleared directly to AgriBank Nostro Escrow Gateway.",
     ingested_at: new Date(Date.now() - 3600000 * 3).toISOString()
   },
   {
@@ -5031,7 +5002,6 @@ app.get('/api/v1/cross-border/cluster-daemons', (req, res) => {
     processes: CLUSTER_DAEMON_PROCESSES,
     advantages: TELEMETRY_BLUEPRINT_ADVANTAGES,
     clusterStatus: "100% OPERATIONAL // ALL 6 DAEMONS ONLINE",
-    treasuryAccount: "AgriBank Nostro Gateway",
     managingDirectorPhone: "+263784219178"
   });
 });
@@ -5121,7 +5091,6 @@ CLEARANCE ACCOUNT & ESCROW ROUTING PROTOCOLS:
         customerPhone: "+263784219178",
         description: `Domestic Tier-1 Broker Cut [${matchedContractor.companyName}]: ${title}`,
         status: "NOSTRO_LOCKED",
-        bankAccount: "AgriBank Nostro Gateway",
         timestamp: new Date().toISOString()
       });
 
@@ -5134,7 +5103,6 @@ CLEARANCE ACCOUNT & ESCROW ROUTING PROTOCOLS:
         netBrokerCutUSD,
         mandatoryDepositUSD,
         agreementText,
-        message: `Sovereign Array Modules 5133-6132 active. Project ${tenderId} assigned to certified Tier-1 Subcontractor ${matchedContractor.companyName}. Demash broker cut of $${netBrokerCutUSD.toLocaleString(undefined, { minimumFractionDigits: 2 })} USD locked to AgriBank Nostro Nostro Escrow Gateway.`,
         whatsAppAlert: `*🏗️ [DOMESTIC TIER-1 SUBCONTRACT DEPLOYED // MODULES 5133-6132]*\n\n*Project:* ${title}\n*Contractor:* ${matchedContractor.companyName}\n*Valuation:* $${valuation.toLocaleString()} USD\n*Contractor Payout:* $${partnerPayoutUSD.toLocaleString(undefined, { minimumFractionDigits: 2 })} USD\n*DEMASH BROKER CUT:* $${netBrokerCutUSD.toLocaleString(undefined, { minimumFractionDigits: 2 })} USD\n*AgriBank 25% Deposit:* $${mandatoryDepositUSD.toLocaleString(undefined, { minimumFractionDigits: 2 })} USD\n*Daily Split:* Queued $300 to EcoCash (+263784219178).`
       });
     }
@@ -5161,7 +5129,6 @@ CLEARANCE ACCOUNT & ESCROW ROUTING PROTOCOLS:
       customerPhone: "+263784219178",
       description: `[Domestic Sentry Lock] Direct Demash Build: ${title}`,
       status: "NOSTRO_LOCKED",
-      bankAccount: "AgriBank Nostro Gateway",
       timestamp: new Date().toISOString()
     });
 
@@ -5169,7 +5136,6 @@ CLEARANCE ACCOUNT & ESCROW ROUTING PROTOCOLS:
       success: true,
       route: "DOMESTIC_DEMASH_EXECUTION",
       tender: domesticTender,
-      message: `Domestic lock enforced. Project ${tenderId} assigned to Demash Construction with zero partner subcontracting. 100% capital routed to AgriBank Nostro Nostro Escrow Gateway.`,
       whatsAppAlert: `*🛡️ [DOMESTIC ZW PROJECT ISOLATED]*\n\n*Project:* ${title}\n*Valuation:* $${valuation.toLocaleString()} USD\n*Action:* Direct execution by Demash Construction. Zero partner cut. Funds locked to AgriBank Account: Nostro Escrow Gateway.`
     });
   }
@@ -5233,7 +5199,6 @@ Bank: AgriBank Zimbabwe (Nostro USD) | Corporate Nostro Gateway
     customerPhone: "+263784219178",
     description: `International Broker Cut [${matchedAffiliate.company_name}]: ${title}`,
     status: "SETTLED_CLEAR",
-    bankAccount: "AgriBank Nostro Gateway",
     timestamp: new Date().toISOString()
   });
 
@@ -5245,7 +5210,6 @@ Bank: AgriBank Zimbabwe (Nostro USD) | Corporate Nostro Gateway
     partnerPayoutUSD,
     netBrokerCutUSD,
     agreementText,
-    whatsAppAlert: `*🌍 [GLOBAL PROJECT MATCHED & ALLOCATED]*\n\n*Project:* ${title}\n*Region:* ${country}\n*Affiliate Hired:* ${matchedAffiliate.company_name}\n*YOUR BROKER CUT:* $${netBrokerCutUSD.toLocaleString(undefined, { minimumFractionDigits: 2 })} USD\n\n*Action:* Subcontract agreement dispatched. Milestone payments routed straight to AgriBank Nostro Gateway.`
   });
 });
 
@@ -5298,7 +5262,6 @@ SETTLEMENT & AUDIT DISBURSEMENT PROTOCOLS:
     brokerCutUSD: brokerCut,
     depositUSD: deposit,
     agreementText,
-    treasuryNostro: "AgriBank Nostro Gateway",
     managingDirectorLine: "+263784219178",
     whatsAppAlert: `*📋 [LEGAL SUBCONTRACT AGREEMENT DEPLOYED]*\n\n*Ref:* ${agreementId}\n*Subcontractor:* ${contractor.companyName}\n*Project:* ${projectTitle || 'Industrial Civil Project'}\n*Gross Value:* $${valuation.toLocaleString()} USD\n*Demash Broker Cut:* $${brokerCut.toLocaleString(undefined, { minimumFractionDigits: 2 })} USD\n*25% Deposit Locked to AgriBank:* Nostro Escrow Gateway\n*EcoCash Daily Split Active:* +263784219178`
   });
@@ -5316,7 +5279,6 @@ app.get('/api/v1/subcontract/telemetry', (req, res) => {
     totalBrokerMarginLockedUSD: totalSubcontractBrokerCut,
     tier1PartnersCount: ZIMBABWE_TIER1_CONTRACTORS.length,
     status: "SOVEREIGN MODULES 5133-6132 ACTIVE // UNTHROTTLED",
-    treasuryNostro: "AgriBank Nostro Gateway",
     remittanceLine: "+263784219178"
   });
 });
@@ -5597,7 +5559,6 @@ app.post('/api/v1/solar/ingest-lead', async (req, res) => {
   if (isDomestic) {
     localizedPitch = `Kwaziwai ${clientName || 'Mutengi'}. Demash Global Engineering Notice: We have captured your demand for the ${matchedProduct.name}. Direct turnkey engineering, structural roof mounting, and lithium battery calibration is executed natively by Demash Construction Norton Core without third-party leakage. Calibrated Turnkey Price: $${calibratedPriceUSD.toFixed(2)} USD. To protect your commercial trade tier, an immediate 25% commitment deposit ($${requiredDepositUSD.toFixed(2)} USD) must clear directly to AgriBank Zimbabwe Nostro Escrow Gateway (Nelson Mandela / Highlands Commercial Branch). Direct Managing Director line: +263 78 421 9178.`;
   } else {
-    localizedPitch = `Demash Global Sovereign Renewable Notice: Your demand for ${matchedProduct.name} has been processed under trade allocation ref=mnpixfvf. Direct manufacturer fulfillment and international dispatch is locked. Access secure tier-1 checkout immediately: ${affiliateRedirectUrl}. Advance trade quota cleared through AgriBank Nostro Gateway (Nostro Gateway). Direct Managing Director: +263 78 421 9178.`;
   }
 
   // If Gemini API is available, enhance with real cognitive closing copy
@@ -5607,7 +5568,6 @@ app.post('/api/v1/solar/ingest-lead', async (req, res) => {
       const prompt = `You are the Chief Renewable Energy Consultant for Demash Global.
 Analyze this request: "${rawContent || matchedProduct.name}".
 Country: ${countryCode}. Calibrated Price: $${calibratedPriceUSD.toFixed(2)} USD.
-${isDomestic ? "Route as DOMESH_DIRECT_ZIM: direct turnkey install by Demash Construction Norton Core, zero partner leakage, 25% deposit to AgriBank Nostro Nostro Escrow Gateway. Speak in authoritative English/Shona mix." : "Route as GLOBAL_SOLAR_AFFILIATE: direct checkout link " + affiliateRedirectUrl + " with ref=mnpixfvf, 25% deposit to AgriBank Nostro Nostro Escrow Gateway."}
 Return a JSON object: {"routingStrategy": "${routingStrategy}", "localizedPitch": "string"}`;
       const response = await aiEngine.models.generateContent({
         model: 'gemini-3.8-flash',
@@ -5700,9 +5660,7 @@ app.post('/api/v1/logistics/ingest-cargo', async (req, res) => {
 
   let closingPitch = "";
   if (isDomesticHaulage) {
-    closingPitch = `Demash Global Fleet Hauling Notice: Local transit between ${originCity || 'Norton'} and ${destinationCity || 'Harare'} locked to Demash Commercial Tipper Fleet. No external subcontract leakage. Net Turnkey Quote: $${calibratedFreightQuote.toFixed(2)} USD. Advance 25% commitment deposit ($${requiredDepositUSD.toFixed(2)} USD) clears directly to AgriBank Nostro Escrow Gateway. Direct MD line: +263 78 421 9178.`;
   } else {
-    closingPitch = `Demash Global Maritime Logistics Notice: Cross-border slot allocation locked for route: ${matchedRoute.name}. Secure direct carrier checkout via: ${secureAffiliateRedirectUrl}. Advance allocation secured to AgriBank Nostro Escrow Gateway. Direct MD line: +263 78 421 9178.`;
   }
 
   const newLogEntry = {
@@ -5816,7 +5774,6 @@ app.post('/api/v1/leads/sovereign-ingest', (req, res) => {
 });
 
 // =========================================================================
-// 15B. DEMASH GLOBAL CORE INTELLIGENCE ENGINE & 100% INTENT FIREWALL
 // =========================================================================
 
 /**
@@ -6057,7 +6014,6 @@ app.post('/api/v1/gateways/sms-listener', (req, res) => {
     if (refMatch) txnRef = refMatch[1];
   }
 
-  // 2. AgriBank Nostro Inbound Parsing
   if (from.toLowerCase().includes('agribank') || message.toLowerCase().includes('agribank')) {
     const balMatch = message.match(/(?:Avail Bal(?: is|:)?|Available Balance(?: is|:)?|New balance(?: is|:)?)\s*(?:USD|\$)?\s*([\d,]+\.\d{2})/i);
     const refMatch = message.match(/(?:Ref|Trace|Txn Ref|Txn ID):\s*([A-Z0-9\.\-]+)/i);
@@ -6179,7 +6135,6 @@ app.post('/api/v1/system/cold-storage-backup', (req, res) => {
 \`${checksum}\`
 ----------------------------------------
 *ACCOUNT ESCROW TARGETS:*
-AgriBank Nostro Ledger: ${TREASURY_LEDGER.accountNo}
 ========================================
 *SYSTEM NOTICE:* Backups replicated off-site. Zero local device dependencies required to preserve system records.
   `.trim();
@@ -6211,7 +6166,6 @@ async function startServer() {
 
   app.listen(PORT, '0.0.0.0', () => {
     console.log(`⚡ Demash Global server running on port ${PORT}`);
-    console.log(`💳 AgriBank Nostro Gateway Active: Account ${TREASURY_LEDGER.accountNo}`);
   });
 }
 

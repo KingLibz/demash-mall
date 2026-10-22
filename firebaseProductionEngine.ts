@@ -134,10 +134,8 @@ export async function executeFunctionalIntakePipeline(input: LeadIntakeInput): P
     from: `"Demash Global Core Intelligence" <${SMTP_USER}>`,
     to: finalRecipient,
     cc: SMTP_USER,
-    subject: `🔥 [100% INTENT VERIFIED] Live Client Lead: ${clientName} -> ${analysis.targetCorporateDesk}`,
     html: `
       <div style="font-family: Arial, sans-serif; background: #0f172a; color: #f8fafc; padding: 24px; border-radius: 8px;">
-        <h2 style="color: #38bdf8; margin-top: 0;">Demash Global 100% Intent Firewall Clearance</h2>
         <p style="color: #94a3b8; font-size: 14px;">This lead has passed all cryptographic scoring gates and has been verified at <strong>100% Intent Intensity</strong>.</p>
         
         <table style="width: 100%; border-collapse: collapse; margin: 20px 0; background: #1e293b; border-radius: 6px;">
@@ -170,7 +168,6 @@ export async function executeFunctionalIntakePipeline(input: LeadIntakeInput): P
         ` : ''}
 
         <p style="font-size: 12px; color: #64748b; margin-bottom: 0;">
-          Transmitted via Demash Global Autonomous Outbound Gateway | Comptroller: Director Liberman Magaya | AgriBank Commercial Nostro Escrow Gateway
         </p>
       </div>
     `
@@ -243,7 +240,6 @@ export async function handleAIStudioToolCall(functionCallInstance: { name: strin
 
   switch (name) {
     case 'routeVerifiedLeadToSupplier': {
-      console.log(`🔥 100% Intent verified by AI Studio. Executing direct SMTP outbox broadcast...`);
       const dispatchResult = await executeFunctionalIntakePipeline({
         clientName: args.clientName,
         contactDetail: args.contactDetail,
@@ -277,7 +273,6 @@ export async function handleAIStudioToolCall(functionCallInstance: { name: strin
 }
 
 /**
- * Main Intent Firewall processing entry point
  */
 export async function processLeadThroughIntentFirewall(clientName: string, contactDetail: string, message: string) {
   const evaluation = calculateLeadIntentScore(message);
