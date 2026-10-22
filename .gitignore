@@ -10,3 +10,8 @@ coverage/
 firebase-applet-config.json
 src/_old_mock_backup/
 src/components/*.patch
+
+.env
+.env.local
+firebase-applet-config.json
+node_modules
