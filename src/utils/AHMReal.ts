@@ -2,7 +2,7 @@ export const AHM_REAL = {
   supplier: "AHM",
   referralCode: "mnpixfvf",
   realLink: "https://ahmcorp.com/?ref=mnpixfvf",
-  redirectLink: "demash.co.zw/r/ahm-mnpixfvf",
+  redirectLink: "demash-core.onrender.com/r/ahm-mnpixfvf",
   catalogue: [
     "Mini Excavators", "Skid Steers", "Lawn Mowers", "Parts",
     "Kubota Engine Excavators", "Briggs & Stratton", "Komatsu Parts"

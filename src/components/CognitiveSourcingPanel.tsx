@@ -180,7 +180,7 @@ export const CognitiveSourcingPanel: React.FC = () => {
             </div>
             <div className="px-3 py-1.5 rounded-xl bg-slate-950 border border-slate-800 text-xs font-mono">
               <span className="text-slate-400 block text-[10px] uppercase">Domain Route</span>
-              <span className="text-cyan-400 font-bold">{COMPANY_INFO.productionDomain || 'demashglobal.live'}</span>
+              <span className="text-cyan-400 font-bold">{COMPANY_INFO.productionDomain || 'demash-core.onrender.com'}</span>
             </div>
           </div>
         </div>

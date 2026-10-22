@@ -13,7 +13,7 @@ export default function AHMTonightMagic() {
       <a href="https://ahmcorp.com/?ref=mnpixfvf" target="_blank" style={{background:"#0f0", color:"#000", padding:"20px 40px", fontSize:"24px", display:"inline-block", textDecoration:"none", fontWeight:"bold"}}>
         SHOP AHM NOW - Your Referral Tracked mnpixfvf
       </a>
-      <p style={{marginTop:"15px", color:"#aaa"}}>Real tracking: demash.co.zw/r/ahm-mnpixfvf | Every click tracked in PerformanceDashboard</p>
+      <p style={{marginTop:"15px", color:"#aaa"}}>Real tracking: demash-core.onrender.com/r/ahm-mnpixfvf | Every click tracked in PerformanceDashboard</p>
       <p>Need Help? WhatsApp: +263784219178 - We Help You Choose Right Machine Tonight</p>
     </div>
   )

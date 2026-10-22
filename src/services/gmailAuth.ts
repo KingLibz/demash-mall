@@ -4,8 +4,8 @@ import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChang
 // REAL Firebase config - from Render Env vars (add real tomorrow)
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY || "demo-key-add-real-in-render-env",
-  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN || "demashglobal-live.firebaseapp.com",
-  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID || "demashglobal-live",
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN || "demash-core.onrender.com.firebaseapp.com",
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID || "demash-core.onrender.com",
   storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
   messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
   appId: import.meta.env.VITE_FIREBASE_APP_ID

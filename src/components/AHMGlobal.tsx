@@ -21,7 +21,7 @@ export default function AHMGlobal() {
         <a href="https://ahmcorp.com/?ref=mnpixfvf" target="_blank" style={{background:"#0f0", color:"#000", padding:"18px 36px", fontSize:"22px", fontWeight:"bold", textDecoration:"none", display:"inline-block"}}>
           SHOP GLOBAL CATALOG — ref=mnpixfvf
         </a>
-        <p style={{marginTop:"12px", fontSize:"12px", color:"#666"}}>Real tracking: demash.co.zw/r/ahm-mnpixfvf | Pitches: REAL only | Accuracy: 100% | No mock 11400</p>
+        <p style={{marginTop:"12px", fontSize:"12px", color:"#666"}}>Real tracking: demash-core.onrender.com/r/ahm-mnpixfvf | Pitches: REAL only | Accuracy: 100% | No mock 11400</p>
       </div>
     </div>
   )

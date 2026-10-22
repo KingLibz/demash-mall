@@ -14,7 +14,7 @@ export const COMPANY_INFO = {
   address: 'K17412, Katanga, Norton, Zimbabwe (Workshop Base) & Highlands Commercial Corridor, Harare',
   headquarters: 'K17412, Katanga, Norton, Zimbabwe',
   workshopBase: 'K17412, Katanga, Norton, Zimbabwe',
-  productionDomain: 'demashglobal.live',
+  productionDomain: 'demash-core.onrender.com',
   operatingCities: ['Harare', 'Norton', 'Bulawayo', 'Mutare', 'Gweru', 'Masvingo', 'Victoria Falls'],
   stats: [
     { label: 'Setting-out Accuracy', value: '1mm', desc: 'Laser-guided civil alignment' },
