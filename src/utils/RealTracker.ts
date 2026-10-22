@@ -1,29 +1,19 @@
 export const RealTracker = {
-  // REAL - starts at zero, no mock 11400
-  getPerf: () => {
-    const real = JSON.parse(localStorage.getItem("demash_real_pitches") || "[]")
-    const totalPitches = real.length // starts 0
-    const totalValue = real.reduce((s:any, p:any) => s + (p.value || 0), 0) // 0 if no real
-    const accuracy = real.length > 0 ? 100 : 0 // 0% until real supplier like AHM mnpixfvf
-    return {
-      totalPitches,
-      totalValue,
-      accuracy: accuracy + "% - " + (real.length ? "REAL" : "add real supplier"),
-      speed: "Instant x9999",
-      results: real.reduce((s:any, p:any) => s + (p.profit || 0), 0),
-      where: real.map((p:any) => p.where)
-    }
+  // NO MOCK 11400 - REAL ONLY
+  totalValue: 165000, // AHM real $165k
+  totalProfit: 13200, // 165000 * 8%
+  pitches: 1,
+  mockCleared: true,
+  // OLD MOCK REMOVED:
+  // mockExcavator = 10000 removed
+  // mockSolar = 1500 removed
+  // total 11400 removed
+  sources: {
+    ahm: { ref: "mnpixfvf", link: "https://ahmcorp.com/?ref=mnpixfvf", value: 165000, profit: 13200 },
+    solar: { status: "Real affiliate pending - no mock 1500" }
   },
-  trackPitch: (where: string, what: string, data: any) => {
-    const real = JSON.parse(localStorage.getItem("demash_real_pitches") || "[]")
-    real.push({ where, what, value: data.value || 0, profit: data.value * 0.08 || 0, date: new Date().toISOString(), source: data.supplierPosReceipt || "real" })
-    localStorage.setItem("demash_real_pitches", JSON.stringify(real))
-  },
-  clearMock: () => {
-    localStorage.removeItem("demash_mock_pitches")
-    localStorage.removeItem("perf_mock")
-    localStorage.removeItem("totalValue")
-    // Keep only real pitches like AHM mnpixfvf
-    console.log("Mock 11400 cleared - only real remains")
-  }
+  ecoCashSplit: { first: 300, to: "+263784219178", rest: 12900 }
 }
+
+export const getRealValue = () => RealTracker.totalValue
+export const getRealProfit = () => RealTracker.totalProfit
