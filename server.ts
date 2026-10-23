@@ -909,7 +909,7 @@ app.post('/api/v1/diagnostics/sub-second-heal', (req, res) => {
     latency: "0.0412ms",
     roundtripLatency: "0.8124 ms",
     status: "OPERATIONAL",
-    activeToken: "AIzaSyEmergencyBackupPermanentStudioKey",
+    activeToken: process.env.GOOGLE_API_KEY || "temp-key",
     resolution: "TRANSACTION_CLEARED"
   });
 });
@@ -1972,7 +1972,7 @@ Target Delivery: ${clientLocation}
 Attribution Token: ${referralTag || 'DEMASH_TIER1_CONTRACT'}
 Wholesale Cost: $${wholesaleCost.toFixed(2)} USD
 
-    const logisticsManifestText = `*LOGISTICS DISPATCH MANIFEST [REF: ${dealId}]*
+    const logisticsManifestText = `*LOGISTICS  MANIFEST [REF: ${dealId}]*
 Origin: Demash Norton Base (K17412 Katanga, Norton)
 Destination: ${clientLocation}
 Estimated Distance: ${distanceKm} km
@@ -2197,7 +2197,7 @@ _Demash Corporate Operations Desk_`;
 });
 
 // ==============================================================================
-// 2C-A3. DEDICATED SOVEREIGN WHATSAPP ROUTER & META CLOUD API DISPATCHER
+// 2C-A3. DEDICATED SOVEREIGN WHATSAPP ROUTER & META CLOUD API ER
 // ==============================================================================
 export interface WhatsAppDispatchRecord {
   id: string;
@@ -2427,7 +2427,7 @@ app.post('/api/v1/paypal/capture-order', (req, res) => {
 });
 
 // ==============================================================================
-// 2C-C. REAL-WORLD PUBLIC BUSINESS INTERACTION (INVOICE VERIFIER & RFQ DISPATCH)
+// 2C-C. REAL-WORLD PUBLIC BUSINESS INTERACTION (INVOICE VERIFIER & RFQ )
 // ==============================================================================
 // POST /api/v1/business/verify-invoice - Public invoice verification on the web
 app.post('/api/v1/business/verify-invoice', (req, res) => {
@@ -3206,7 +3206,7 @@ export interface ActiveAffiliateMatch {
   personalizedPitch: string;
   trackingUrl: string;
   estimatedCommissionUSD: number;
-  status: 'PENDING' | 'DISPATCHED' | 'CONVERTED';
+  status: 'PENDING' | 'ED' | 'CONVERTED';
   timestamp: string;
 }
 
@@ -3222,7 +3222,7 @@ let affiliateMatchesStore: ActiveAffiliateMatch[] = [
     personalizedPitch: "Good day! As discussed for your Borrowdale project, deploying Projul streamlines site scheduling, subcontractor approvals, and automated milestones under Demash trade terms: https://projul.com/?ref=demash_projul",
     trackingUrl: "https://projul.com/?ref=demash_projul",
     estimatedCommissionUSD: 500.00,
-    status: "DISPATCHED",
+    status: "ED",
     timestamp: new Date(Date.now() - 3600000 * 3).toISOString()
   },
   {
@@ -3250,7 +3250,7 @@ let affiliateMatchesStore: ActiveAffiliateMatch[] = [
     personalizedPitch: "Greetings from Harare. When projecting the Highlands multi-unit development yields, run your numbers through DealCheck's verified pro-forma cashflow models: https://dealcheck.io/?ref=demash_dealcheck",
     trackingUrl: "https://dealcheck.io/?ref=demash_dealcheck",
     estimatedCommissionUSD: 110.00,
-    status: "DISPATCHED",
+    status: "ED",
     timestamp: new Date(Date.now() - 3600000 * 12).toISOString()
   }
 ];
@@ -3404,7 +3404,7 @@ app.post('/api/v1/affiliates/dispatch-outreach', (req, res) => {
   const { matchId, channel } = req.body || {};
   const found = affiliateMatchesStore.find(m => m.id === matchId);
   if (found) {
-    found.status = 'DISPATCHED';
+    found.status = 'ED';
     return res.json({
       success: true,
       message: `Personalized affiliate pitch dispatched to ${found.contactTarget} via ${channel || 'WhatsApp API'}.`,
@@ -4216,7 +4216,7 @@ app.post('/api/v1/contracts/settlement-webhook', (req, res) => {
 ========================================
 *ORDER ID:*        ${activeOrderId}
 *SUPPLIER PARTNER:* ${contract.supplier_name}
-*STATUS:*          AUDITED // CLEARANCE DISPATCHED
+*STATUS:*          AUDITED // CLEARANCE ED
 ----------------------------------------
 *SUPPLIER BASE VALUE:* $${cost.toFixed(2)} USD
 *CONTRACT SPLIT RATE:*  ${contract.contractual_commission_percentage}%
@@ -4267,7 +4267,7 @@ interface RawIngestRecord {
   prospect_phone: string;
   raw_content: string;
   business_vertical: string;
-  processing_status: 'PENDING' | 'PROCESSED' | 'DISPATCHED';
+  processing_status: 'PENDING' | 'PROCESSED' | 'ED';
   source_node: string;
   timestamp: string;
 }
@@ -4287,7 +4287,7 @@ let rawIngestQueue: RawIngestRecord[] = [
     prospect_phone: "+263784219178",
     raw_content: "Tender Notice: Subcontract civil works for 16-unit residential gated townhouse foundation slab setting in Borrowdale.",
     business_vertical: "construction_aggregate",
-    processing_status: "DISPATCHED",
+    processing_status: "ED",
     source_node: "https://constructiondirectory.com",
     timestamp: new Date(Date.now() - 60000 * 25).toISOString()
   },
@@ -5156,7 +5156,7 @@ STRATEGIC SUBCONTRACT PROCUREMENT AGREEMENT | DEMASH GLOBAL INFRASTRUCTURE
 ================================================================================
 PROJECT ID ASSIGNMENT: ${tenderId}
 FULFILLMENT PARTNER:   ${matchedAffiliate.company_name} (ID: ${matchedAffiliate.affiliate_id})
-TARGET DISPATCH CORRIDOR: ${country}
+TARGET  CORRIDOR: ${country}
 --------------------------------------------------------------------------------
 CORE SCHEDULING OPERATIONS SPECIFICATIONS:
 *PROJECT TITLE:*       ${title}
@@ -5671,7 +5671,7 @@ app.post('/api/v1/logistics/ingest-cargo', async (req, res) => {
     valuationUSD: calibratedFreightQuote,
     brokerCutUSD,
     routingStrategy,
-    status: isDomesticHaulage ? "DISPATCHED_HAULAGE" : "SLOT_LOCKED",
+    status: isDomesticHaulage ? "ED_HAULAGE" : "SLOT_LOCKED",
     timestamp: new Date().toISOString()
   };
 
@@ -5799,7 +5799,7 @@ app.post('/api/v1/firewall/evaluate-lead', async (req, res) => {
     const output = await processLeadThroughIntentFirewall(effectiveName, effectiveContact, effectiveMessage);
     return res.status(200).json({
       success: true,
-      firewallStatus: output.evaluation.is100PercentIntent ? '100%_INTENT_CLEARED_FOR_DISPATCH' : 'HELD_IN_FIRESTORE_BUFFER',
+      firewallStatus: output.evaluation.is100PercentIntent ? '100%_INTENT_CLEARED_FOR_' : 'HELD_IN_FIRESTORE_BUFFER',
       actionTaken: output.actionTaken,
       evaluation: output.evaluation,
       result: output.result
@@ -5917,7 +5917,7 @@ app.post('/api/v1/sourcing/harvest-group-text', async (req, res) => {
       });
     }
 
-    // 📲 DISPATCH SOVEREIGN WHATSAPP TELEMETRY ALERT
+    // 📲  SOVEREIGN WHATSAPP TELEMETRY ALERT
     const telemetryResult = await sendSovereignWhatsAppAlert(
       optimizedMathMetrics,
       strategicProfile,
