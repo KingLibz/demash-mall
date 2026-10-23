@@ -29,7 +29,6 @@ interface BufferRecord {
 }
 
 export const IntentFirewallPanel: React.FC = () => {
-  const [clientName, setClientName] = useState('Dr. Tinashe Moyo');
   const [contactDetail, setContactDetail] = useState('+44 7921 883921 / tinashe.moyo@nhstrust.co.uk');
   const [rawMessage, setRawMessage] = useState(
     'I want to procure a 5-ton excavator and earthmover through AHM with an approved budget of $165,000 USD. Ready to place initial order deposit immediately.'
@@ -116,35 +115,27 @@ export const IntentFirewallPanel: React.FC = () => {
 
   const presets = [
     {
-      label: 'AHM Heavy Machinery (100% Intent)',
       desc: 'Budget $165,000 USD + procure + AHM supplier tag',
-      name: 'Dr. Tinashe Moyo',
       contact: '+44 7921 883921 / tinashe.moyo@nhstrust.co.uk',
       text: 'I want to procure a 5-ton excavator through AHM with an approved budget of $165,000 USD. Ready to place deposit wire today.'
     },
     {
-      label: 'Electrosales Hardware & Rebar (100% Intent)',
       desc: 'Budget $45,000 USD + buy + Electrosales tag',
       name: 'Farai Chidzero (Civil Eng)',
       contact: '+263 77 241 9081 / farai@hararedevelopments.co.zw',
       text: 'Need to buy structural reinforcement high-tensile steel from Electrosales with $45,000 USD cash allocated. Paynow / Nostro transfer ready.'
     },
     {
-      label: 'Property.CoZa Sovereign Villa (100% Intent)',
       desc: 'Budget $320,000 USD + order + PropertyCoZa tag',
-      name: 'Eng. Ruvimbo Maphosa',
-      contact: '+27 82 459 1102 / r.maphosa@sandtoncapital.co.za',
       text: 'We are ordering the turnkey luxury villa package via PropertyCoZa for our Shawasha Hills stand. Total budget $320,000 USD ready for escrow deposit.'
     },
     {
-      label: 'Partial Intent Lead (70% - Hold in Buffer)',
       desc: 'Budget $85,000 USD + buy (missing supplier/blueprint tag)',
       name: 'Simba Gumbo',
       contact: '+263 71 890 2234 / sgumbo@gmail.com',
       text: 'We have $85,000 USD cash ready to buy building materials for our warehouse construction in Msasa. Please send product catalogue.'
     },
     {
-      label: 'Casual Browser (0% Intent - Hold in Buffer)',
       desc: 'Casual inquiry with zero budget and zero buying tags',
       name: 'Anonymous Visitor',
       contact: '+263 78 000 0000 / visitor@yahoo.com',
@@ -174,7 +165,6 @@ export const IntentFirewallPanel: React.FC = () => {
               <span>CORE INTELLIGENCE ENGINE & 100% INTENT FIREWALL</span>
             </div>
             <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
-              Sovereign Intent Firewall & Corporate Outbox Valve
             </h2>
             <p className="text-xs sm:text-sm text-slate-300 max-w-3xl mt-1 leading-relaxed">
               Acts as a strict cryptographic intent firewall for Demash Global Infrastructure & Capital. Calculates real-time mathematical Lead Intent Scores and routes only verified 100% intent leads to external corporate desks via verified Nodemailer SMTP.
@@ -242,7 +232,6 @@ export const IntentFirewallPanel: React.FC = () => {
             {/* Presets Strip */}
             <div className="space-y-2">
               <label className="text-xs font-semibold text-slate-300">
-                Verified Production Procurement Scenarios:
               </label>
               <div className="flex flex-wrap gap-2">
                 {presets.map((p, idx) => (
@@ -271,7 +260,6 @@ export const IntentFirewallPanel: React.FC = () => {
                   value={clientName}
                   onChange={(e) => setClientName(e.target.value)}
                   className="w-full px-3.5 py-2 rounded-xl bg-slate-950 border border-slate-800 text-xs text-white focus:outline-none focus:border-amber-400 font-mono"
-                  placeholder="e.g. Dr. Tinashe Moyo"
                 />
               </div>
 

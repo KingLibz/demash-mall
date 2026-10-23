@@ -1211,7 +1211,6 @@ export const ExecutiveAdmin: React.FC = () => {
           </span>
         </button>
 
-        {/* 25. Core Intelligence Engine & 100% Intent Firewall */}
         <button
           onClick={() => setActiveSection('intent-firewall')}
           className={`p-3.5 rounded-xl text-left border transition-all cursor-pointer flex items-center justify-between gap-3 ${
@@ -1222,7 +1221,6 @@ export const ExecutiveAdmin: React.FC = () => {
         >
           <div className="flex items-center gap-2.5">
             <Flame className={`w-4 h-4 shrink-0 ${activeSection === 'intent-firewall' ? 'text-slate-950' : 'text-amber-400'}`} />
-            <span className="text-xs font-semibold">100% Intent Firewall & AI Engine</span>
           </div>
           <span className={`text-[10px] font-mono px-2 py-0.5 rounded font-bold shrink-0 ${
             activeSection === 'intent-firewall' ? 'bg-black/20 text-slate-950' : 'bg-emerald-950/60 text-emerald-400 border border-emerald-500/30'
