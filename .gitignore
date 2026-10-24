@@ -15,3 +15,5 @@ src/components/*.patch
 .env.local
 firebase-applet-config.json
 node_modules
+dist/
+firebase-applet-config.json
