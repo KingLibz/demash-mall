@@ -27,7 +27,7 @@ import FinancialStreamRemittancePanel from './FinancialStreamRemittancePanel';
 import { DomesticSubcontractingPipelinePanel } from './DomesticSubcontractingPipelinePanel';
 import { SovereignMilestoneMatrixPanel } from './SovereignMilestoneMatrixPanel';
 import { GmailAffiliateHubPanel } from './GmailAffiliateHubPanel';
-import { IntentFirewallPanel } from './IntentFirewallPanel';
+import IntentFirewallPanel from './IntentFirewallPanel';
 import { CognitiveSourcingPanel } from './CognitiveSourcingPanel';
 import { COMPANY_INFO } from '../data/companyData';
 import { 
